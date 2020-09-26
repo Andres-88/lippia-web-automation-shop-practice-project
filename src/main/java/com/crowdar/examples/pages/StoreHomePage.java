@@ -8,11 +8,6 @@ import org.testng.Assert;
 
 public class StoreHomePage extends PageBaseStore {
 
-    public StoreHomePage(RemoteWebDriver driver) {
-        super(driver);
-        this.url = "";
-    }
-
     private final String SIGN_IN_BUTTON_CSS_SELECTOR = "#header > div.nav > div > div > nav > div.header_user_info > a";
     private final String CREATE_ACCOUNT_BUTTON_CSS_SELECTOR = "#SubmitCreate";
     private final String SIGNIN_BUTTON_CSS_SELECTOR = "#SubmitLogin";
@@ -22,8 +17,17 @@ public class StoreHomePage extends PageBaseStore {
     private final String EMAIL_INPUT_CREATE_CSS_SELECTOR = "#email_create";
     private final String EMAIL_INPUT_LOGIN_CSS_SELECTOR = "#email";
     private final String FORM_CSS_SELECTOR = "#noSlide > h1";
+    private final String INPUT_SEARCH_ID ="search_query_top";
+    private final String BUTTON_SEARCH_CSS_SELECTOR = "#searchbox > button";
+
+
+    public StoreHomePage(RemoteWebDriver driver) {
+        super(driver);
+        this.url = "";
+    }
 
     public void go(){
+
         navigateToCompleteURL();
     }
 
@@ -55,10 +59,12 @@ public class StoreHomePage extends PageBaseStore {
     }
 
     public void createAnAccountButton(){
+
         clickElement(By.cssSelector(CREATE_ACCOUNT_BUTTON_CSS_SELECTOR));
     }
 
     public void registerButton(){
+
         clickElement(By.id(REGISTER_BUTTON_ID));
     }
 
@@ -91,5 +97,8 @@ public class StoreHomePage extends PageBaseStore {
         Assert.assertTrue(isElementPresentAndDisplayed(By.cssSelector(FORM_CSS_SELECTOR)), "El Formulario no se ha desplegado");
     }
 
-
+    public void enterSearch(String busqueda){
+        completeField(By.id(INPUT_SEARCH_ID), busqueda);
+        clickElement(By.cssSelector(BUTTON_SEARCH_CSS_SELECTOR));
+    }
 }
